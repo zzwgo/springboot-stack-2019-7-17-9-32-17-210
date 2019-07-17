@@ -3,11 +3,9 @@ package com.tw.apistackbase.entity;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 public class Procuratorate {
@@ -19,8 +17,19 @@ public class Procuratorate {
     @NotNull
     private String name;
 
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Prosecutor> prosecutors;
     public Procuratorate(@Length(min = 0, max = 50) @NotNull String name) {
         this.name = name;
+    }
+
+    public List<Prosecutor> getProsecutors() {
+        return prosecutors;
+    }
+
+    public void setProsecutors(List<Prosecutor> prosecutors) {
+        this.prosecutors = prosecutors;
     }
 
     public String getId() {

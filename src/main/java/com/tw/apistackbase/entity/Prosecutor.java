@@ -15,7 +15,6 @@ public class Prosecutor {
     private String id;
     @Column(nullable = false,length = 255)
     private String name;
-
     public Prosecutor(String name) {
         this.name = name;
     }

@@ -65,4 +65,14 @@ public class CriminalCaseTest {
         CriminalCase result=criminalCaseRepository.saveAndFlush(criminalCase1);
         assertEquals("abcd",result.getCriminalCaseDetail().getObjective());
     }
+
+    //----------------------------------------------------CriminalCase Procuratorate not null
+    @Test
+    public void should_CriminalCase_can_set_Procuratorate(){
+        CriminalCase criminalCase1 = new CriminalCase((long) 1000,"dark1");
+        criminalCase1.setCriminalCaseDetail(new CriminalCaseDetail("abcd","abc"));
+        criminalCase1.setProcuratorate(new Procuratorate("胖子"));
+        CriminalCase result=criminalCaseRepository.saveAndFlush(criminalCase1);
+        assertEquals("胖子",result.getProcuratorate().getName());
+    }
 }
