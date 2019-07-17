@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 public class CriminalCaseDetail {
     @Id
     @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
     private String id;
     @Length(min = 0,max = 255)
     @NotNull

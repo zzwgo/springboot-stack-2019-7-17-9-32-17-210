@@ -17,8 +17,22 @@ public class CriminalCase {
     @Length(min = 0,max = 255)
     @NotNull
     private String name;
+
     @OneToOne(cascade = CascadeType.ALL)
     private CriminalCaseDetail criminalCaseDetail;
+
+    @NotNull
+    @OneToOne(cascade = CascadeType.ALL)
+    private Procuratorate procuratorate;
+
+    public Procuratorate getProcuratorate() {
+        return procuratorate;
+    }
+
+    public void setProcuratorate(Procuratorate procuratorate) {
+        this.procuratorate = procuratorate;
+    }
+
     public CriminalCase() {
     }
 
