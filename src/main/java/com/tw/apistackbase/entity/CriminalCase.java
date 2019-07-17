@@ -3,9 +3,7 @@ package com.tw.apistackbase.entity;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -15,10 +13,12 @@ public class CriminalCase {
     @GenericGenerator(name="system-uuid",strategy = "uuid")
     private String id;
     private Long time;
+
     @Length(min = 0,max = 255)
     @NotNull
     private String name;
-
+    @OneToOne(cascade = CascadeType.ALL)
+    private CriminalCaseDetail criminalCaseDetail;
     public CriminalCase() {
     }
 
@@ -50,4 +50,14 @@ public class CriminalCase {
     public void setName(String name) {
         this.name = name;
     }
+
+
+    public CriminalCaseDetail getCriminalCaseDetail() {
+        return criminalCaseDetail;
+    }
+
+    public void setCriminalCaseDetail(CriminalCaseDetail criminalCaseDetail) {
+        this.criminalCaseDetail = criminalCaseDetail;
+    }
+
 }

@@ -57,4 +57,12 @@ public class CriminalCaseTest {
         List<CriminalCase> cases = criminalCaseRepository.findCaseByName("dark1");
         assertEquals(2,cases.size());
     }
+
+    @Test
+    public void should_can_set_detail(){
+        CriminalCase criminalCase1 = new CriminalCase((long) 1000,"dark1");
+        criminalCase1.setCriminalCaseDetail(new CriminalCaseDetail("abcd","abc"));
+        CriminalCase result=criminalCaseRepository.saveAndFlush(criminalCase1);
+        assertEquals("abcd",result.getCriminalCaseDetail().getObjective());
+    }
 }
