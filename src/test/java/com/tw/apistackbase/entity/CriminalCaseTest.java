@@ -8,6 +8,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -18,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class CriminalCaseTest {
     @Autowired
     private CriminalCaseRepository criminalCaseRepository;
+
     @Test
     public void should_throw_exception_when_save_null() {
         CriminalCase criminalCase = new CriminalCase();
@@ -32,5 +34,10 @@ public class CriminalCaseTest {
                 "...............................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................");
         assertThrows(Exception.class, () ->
                 criminalCaseRepository.saveAndFlush(criminalCase));
+    }
+    @Test
+    public void should_return_exception_when_give_a_id() {
+        CriminalCase criminalCase=criminalCaseRepository.findById("402881496c002806016c002978820000").orElse(null);
+        assertEquals("dark",criminalCase.getName());
     }
 }
