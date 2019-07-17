@@ -47,4 +47,14 @@ public class CriminalCaseTest {
         assertEquals("dark2", cases.get(1).getName());
         assertEquals("dark1", cases.get(2).getName());
     }
+
+    @Test
+    public void should_return_result_by_case_name() {
+        CriminalCase criminalCase1 = new CriminalCase((long) 1000,"dark1");
+        CriminalCase criminalCase2 = new CriminalCase((long) 2000,"dark1");
+        criminalCaseRepository.saveAndFlush(criminalCase1);
+        criminalCaseRepository.saveAndFlush(criminalCase2);
+        List<CriminalCase> cases = criminalCaseRepository.findCaseByName("dark1");
+        assertEquals(2,cases.size());
+    }
 }
