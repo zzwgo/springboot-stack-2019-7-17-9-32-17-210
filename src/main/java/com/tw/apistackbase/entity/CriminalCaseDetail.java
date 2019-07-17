@@ -11,8 +11,8 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class CriminalCaseDetail {
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid")
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "system-uuid")
     private String id;
     @Length(min = 0,max = 255)
     @NotNull
