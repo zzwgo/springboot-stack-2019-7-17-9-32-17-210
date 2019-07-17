@@ -19,6 +19,14 @@ public class CriminalCase {
     @NotNull
     private String name;
 
+    public CriminalCase() {
+    }
+
+    public CriminalCase(Long time, @Length(min = 0, max = 255) @NotNull String name) {
+        this.time = time;
+        this.name = name;
+    }
+
     public String getId() {
         return id;
     }

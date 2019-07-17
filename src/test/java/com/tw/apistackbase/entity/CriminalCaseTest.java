@@ -8,21 +8,19 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class CriminalCaseTest {
     @Autowired
     private CriminalCaseRepository criminalCaseRepository;
 
     @Test
     public void should_throw_exception_when_save_null() {
-        CriminalCase criminalCase = new CriminalCase();
+        CriminalCase criminalCase = new CriminalCase(null,null);
         assertThrows(Exception.class, () ->
                 criminalCaseRepository.saveAndFlush(criminalCase));
     }
@@ -35,9 +33,18 @@ public class CriminalCaseTest {
         assertThrows(Exception.class, () ->
                 criminalCaseRepository.saveAndFlush(criminalCase));
     }
+
     @Test
-    public void should_return_exception_when_give_a_id() {
-        CriminalCase criminalCase=criminalCaseRepository.findById("402881496c002806016c002978820000").orElse(null);
-        assertEquals("dark",criminalCase.getName());
+    public void should_return_result_by_time_desc() {
+        CriminalCase criminalCase1 = new CriminalCase((long) 1000,"dark1");
+        CriminalCase criminalCase2 = new CriminalCase((long) 2000,"dark2");
+        CriminalCase criminalCase3 = new CriminalCase((long) 3000,"dark3");
+        criminalCaseRepository.saveAndFlush(criminalCase1);
+        criminalCaseRepository.saveAndFlush(criminalCase2);
+        criminalCaseRepository.saveAndFlush(criminalCase3);
+        List<CriminalCase> cases = criminalCaseRepository.findCaseByTimeDesc();
+        assertEquals("dark3", cases.get(0).getName());
+        assertEquals("dark2", cases.get(1).getName());
+        assertEquals("dark1", cases.get(2).getName());
     }
 }
